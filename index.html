@@ -668,26 +668,61 @@
     setInterval(updateDate, 1000);
   }
 
-  function initGoogleClients() {
+function initGoogleClients() {
+  const waitForGoogleLibs = () => {
+    const hasGapi = typeof window.gapi !== 'undefined';
+    const hasGoogle = typeof window.google !== 'undefined'
+      && window.google.accounts
+      && window.google.accounts.oauth2;
+
+    if (!hasGapi || !hasGoogle) {
+      setTimeout(waitForGoogleLibs, 300);
+      return;
+    }
+
     // 1) init gapi client
-    gapi.load('client', async () => {
-      await gapi.client.init({
+    window.gapi.load('client', async () => {
+      await window.gapi.client.init({
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
       });
       gapiInited = true;
-      maybeReady();
+      maybeReady && maybeReady();
     });
 
     // 2) init GIS token client
-    tokenClient = google.accounts.oauth2.initTokenClient({
+    tokenClient = window.google.accounts.oauth2.initTokenClient({
       client_id: CLIENT_ID,
       scope: SCOPES,
       callback: async (resp) => {
         if (!resp || resp.error) {
           showError('Google auth error: ' + (resp?.error || 'unknown'));
-          setDisconnected();
+          setDisconnected && setDisconnected();
           return;
         }
+        accessToken = resp.access_token;
+        window.gapi.client.setToken({ access_token: accessToken });
+
+        try {
+          const me = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: { Authorization: 'Bearer ' + accessToken }
+          }).then(r => r.json());
+          setConnected && setConnected(me?.name || 'Google User', me?.email || '');
+        } catch (e) {
+          setConnected && setConnected('Google User', '');
+        }
+
+        if (typeof sanityCheckSheet === 'function') {
+          await sanityCheckSheet();
+        }
+      }
+    });
+
+    gisInited = true;
+  };
+
+  waitForGoogleLibs();
+}
+
         accessToken = resp.access_token;
         gapi.client.setToken({ access_token: accessToken });
 
@@ -1505,8 +1540,10 @@
     setTimeout(() => msg.remove(), 2500);
   }
 
-  // start
+// start
+window.addEventListener('load', () => {
   init();
+});
 </script>
 </body>
 </html>
