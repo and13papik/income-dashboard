@@ -103,6 +103,12 @@
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
+    #googleSignInButton:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
     .status-badge {
       padding: 8px 12px;
       border-radius: 6px;
@@ -270,7 +276,7 @@
       border-radius: 8px;
       font-weight: 600;
       font-size: 12px;
-      z-index: 1000;
+      z-index: 3000;
       animation: slideInRight 0.5s ease-out;
       max-width: 520px;
     }
@@ -381,20 +387,20 @@
       </div>
       <div class="sync-controls">
         <div class="status-badge" id="syncStatus">🔴 Not Connected</div>
-        <button id="googleSignInButton" onclick="handleGoogleSignIn()">📊 Sign in with Google</button>
+        <button id="googleSignInButton" type="button">📊 Sign in with Google</button>
       </div>
     </div>
   </header>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('add-income', event)">➕ Добавить</button>
-    <button class="tab-btn" onclick="switchTab('edit-income', event)">✏️ Редактировать</button>
-    <button class="tab-btn" onclick="switchTab('dashboard', event)">📊 Dashboard</button>
-    <button class="tab-btn" onclick="switchTab('reports', event)">📈 По операторам</button>
-    <button class="tab-btn" onclick="switchTab('advances', event)">💰 Авансы/Зарплата</button>
-    <button class="tab-btn" onclick="switchTab('penalties', event)">⚠️ Штрафы</button>
-    <button class="tab-btn" onclick="switchTab('settings', event)">⚙️ Настройки</button>
-    <button class="tab-btn" onclick="switchTab('sheets', event)">📋 Google Sheets</button>
+    <button class="tab-btn active" type="button" onclick="switchTab('add-income', event)">➕ Добавить</button>
+    <button class="tab-btn" type="button" onclick="switchTab('edit-income', event)">✏️ Редактировать</button>
+    <button class="tab-btn" type="button" onclick="switchTab('dashboard', event)">📊 Dashboard</button>
+    <button class="tab-btn" type="button" onclick="switchTab('reports', event)">📈 По операторам</button>
+    <button class="tab-btn" type="button" onclick="switchTab('advances', event)">💰 Авансы/Зарплата</button>
+    <button class="tab-btn" type="button" onclick="switchTab('penalties', event)">⚠️ Штрафы</button>
+    <button class="tab-btn" type="button" onclick="switchTab('settings', event)">⚙️ Настройки</button>
+    <button class="tab-btn" type="button" onclick="switchTab('sheets', event)">📋 Google Sheets</button>
   </div>
 
   <!-- TAB 1 -->
@@ -429,23 +435,23 @@
 
       <div class="form-group">
         <label>% Оператору</label>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
           <div>
-            <small style="color: var(--text-secondary); font-size: 10px;">OnlyFans</small>
+            <small style="color:var(--text-secondary);font-size:10px;">OnlyFans</small>
             <input type="number" id="onlyfansPercent" value="20" min="0" max="100" step="1">
           </div>
           <div>
-            <small style="color: var(--text-secondary); font-size: 10px;">Крипто</small>
+            <small style="color:var(--text-secondary);font-size:10px;">Крипто</small>
             <input type="number" id="cryptoPercent" value="20" min="0" max="100" step="1">
           </div>
           <div>
-            <small style="color: var(--text-secondary); font-size: 10px;">PayPal</small>
+            <small style="color:var(--text-secondary);font-size:10px;">PayPal</small>
             <input type="number" id="paypalPercent" value="15" min="0" max="100" step="1">
           </div>
         </div>
       </div>
 
-      <button class="btn-primary" onclick="addIncome()">➕ Добавить доход</button>
+      <button class="btn-primary" type="button" onclick="addIncome()">➕ Добавить доход</button>
     </div>
   </div>
 
@@ -467,12 +473,12 @@
 
   <!-- TAB 4 -->
   <div id="reports" class="tab-content">
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px;">
-      <div style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(71, 85, 105, 0.3); border-radius: 12px; padding: 24px; max-height: 85vh; overflow-y: auto;">
-        <h3 style="margin-bottom: 10px; font-size: 13px;">Операторы</h3>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;">
+      <div style="background:rgba(30,41,59,0.8);border:1px solid rgba(71,85,105,0.3);border-radius:12px;padding:24px;max-height:85vh;overflow-y:auto;">
+        <h3 style="margin-bottom:10px;font-size:13px;">Операторы</h3>
         <div class="operator-list" id="operatorListReport"></div>
       </div>
-      <div class="report-content" id="reportContent" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(71, 85, 105, 0.3); border-radius: 12px; padding: 24px; max-height: 85vh; overflow-y: auto;"></div>
+      <div class="report-content" id="reportContent" style="background:rgba(30,41,59,0.8);border:1px solid rgba(71,85,105,0.3);border-radius:12px;padding:24px;max-height:85vh;overflow-y:auto;"></div>
     </div>
   </div>
 
@@ -502,7 +508,7 @@
         <input type="number" id="advanceAmount" placeholder="0.00" step="0.01" min="0">
       </div>
 
-      <button class="btn-primary" onclick="addAdvance()">+ Выдать</button>
+      <button class="btn-primary" type="button" onclick="addAdvance()">+ Выдать</button>
 
       <div class="section-title">История</div>
       <div id="advancesHistory"></div>
@@ -531,7 +537,7 @@
         <input type="text" id="penaltyReason" placeholder="Описание штрафа">
       </div>
 
-      <button class="btn-primary" onclick="addPenalty()">⚠️ Добавить штраф</button>
+      <button class="btn-primary" type="button" onclick="addPenalty()">⚠️ Добавить штраф</button>
 
       <div class="section-title">История</div>
       <div id="penaltiesHistory"></div>
@@ -543,29 +549,29 @@
     <div class="card">
       <div class="card-title">⚙️ Настройки</div>
 
-      <h3 style="margin-top: 16px; margin-bottom: 10px; font-size: 13px;">Операторы</h3>
+      <h3 style="margin-top:16px;margin-bottom:10px;font-size:13px;">Операторы</h3>
       <div id="operatorsList"></div>
-      <button class="btn-primary" onclick="openModal('addOperatorModal')" style="width: auto; margin-top: 10px;">+ Оператор</button>
+      <button class="btn-primary" type="button" onclick="openModal('addOperatorModal')" style="width:auto;margin-top:10px;">+ Оператор</button>
 
-      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 13px;">Анкеты</h3>
+      <h3 style="margin-top:24px;margin-bottom:10px;font-size:13px;">Анкеты</h3>
       <div id="anketasList"></div>
-      <button class="btn-primary" onclick="openModal('addAnketaModal')" style="width: auto; margin-top: 10px;">+ Анкета</button>
+      <button class="btn-primary" type="button" onclick="openModal('addAnketaModal')" style="width:auto;margin-top:10px;">+ Анкета</button>
 
-      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 13px;">Администраторы</h3>
+      <h3 style="margin-top:24px;margin-bottom:10px;font-size:13px;">Администраторы</h3>
       <div id="adminList"></div>
-      <button class="btn-primary" onclick="openModal('addAdminModal')" style="width: auto; margin-top: 10px;">+ Администратор</button>
+      <button class="btn-primary" type="button" onclick="openModal('addAdminModal')" style="width:auto;margin-top:10px;">+ Администратор</button>
     </div>
   </div>
 
   <!-- TAB 8 -->
   <div id="sheets" class="tab-content">
     <div class="card">
-      <div class="card-title">📋 Google Sheets</div>
-      <div id="sheetsContainer" style="margin-top: 20px;">
+      <div class="card-title">📋 Google Sheets Viewer</div>
+      <div id="sheetsContainer" style="margin-top:20px;">
         <div class="setup-info">
           <h2>📊 Синхронизация с Google Sheets</h2>
-          <p style="margin-bottom: 16px;">Нажмите “Sign in with Google”, затем данные будут синхронизированы между админами через общую таблицу.</p>
-          <button class="btn-primary" onclick="handleGoogleSignIn()" style="width: auto;">Войти с Google</button>
+          <p style="margin-bottom:16px;">Войдите через Google чтобы синхронизировать и открыть вашу таблицу</p>
+          <button class="btn-primary" type="button" id="googleSignInButton2" style="width:auto;">Войти с Google</button>
         </div>
       </div>
     </div>
@@ -577,13 +583,13 @@
   <div class="modal-content">
     <div class="modal-header">
       Добавить оператора
-      <button class="close-modal" onclick="closeModal('addOperatorModal')">×</button>
+      <button class="close-modal" type="button" onclick="closeModal('addOperatorModal')">×</button>
     </div>
     <div class="form-group">
       <label>Имя</label>
       <input type="text" id="newOperatorName">
     </div>
-    <button class="btn-primary" onclick="addOperator()">Добавить</button>
+    <button class="btn-primary" type="button" onclick="addOperator()">Добавить</button>
   </div>
 </div>
 
@@ -591,13 +597,13 @@
   <div class="modal-content">
     <div class="modal-header">
       Добавить анкету
-      <button class="close-modal" onclick="closeModal('addAnketaModal')">×</button>
+      <button class="close-modal" type="button" onclick="closeModal('addAnketaModal')">×</button>
     </div>
     <div class="form-group">
       <label>Имя</label>
       <input type="text" id="newAnketaName">
     </div>
-    <button class="btn-primary" onclick="addAnketa()">Добавить</button>
+    <button class="btn-primary" type="button" onclick="addAnketa()">Добавить</button>
   </div>
 </div>
 
@@ -605,13 +611,13 @@
   <div class="modal-content">
     <div class="modal-header">
       Добавить администратора
-      <button class="close-modal" onclick="closeModal('addAdminModal')">×</button>
+      <button class="close-modal" type="button" onclick="closeModal('addAdminModal')">×</button>
     </div>
     <div class="form-group">
       <label>Имя администратора</label>
       <input type="text" id="newAdminName">
     </div>
-    <button class="btn-primary" onclick="addAdmin()">Добавить</button>
+    <button class="btn-primary" type="button" onclick="addAdmin()">Добавить</button>
   </div>
 </div>
 
@@ -619,10 +625,10 @@
   <div class="modal-content">
     <div class="modal-header">
       Редактировать
-      <button class="close-modal" onclick="closeModal('editModal')">×</button>
+      <button class="close-modal" type="button" onclick="closeModal('editModal')">×</button>
     </div>
     <div id="editFormContent"></div>
-    <button class="btn-primary" onclick="saveEdit()">Сохранить</button>
+    <button class="btn-primary" type="button" onclick="saveEdit()">Сохранить</button>
   </div>
 </div>
 
@@ -635,16 +641,18 @@
   let allAdmins = JSON.parse(localStorage.getItem('allAdmins') || '["Admin 1","Admin 2"]');
   const ADMIN_PERCENT = 8;
 
+  // ✅ твой Client ID
   const CLIENT_ID = '752768254066-ba8ilut3p4s17068h65voakgmtao2bu0.apps.googleusercontent.com';
+
+  // ✅ твой Spreadsheet ID
   const SPREADSHEET_ID = '1rZJIgN0C38ltZDlKFPnmz0I2G5vQPq8Z9fo9r2l8Uuc';
 
+  // Scopes для записи
   const SCOPES = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-    'openid'
+    'https://www.googleapis.com/auth/spreadsheets'
   ].join(' ');
 
+  // Google runtime
   let tokenClient = null;
   let accessToken = null;
   let userLoggedIn = false;
@@ -652,9 +660,14 @@
   let gisInited = false;
 
   // =========================
-  // INIT
+  // BOOT
   // =========================
-  function init() {
+  window.addEventListener('load', () => {
+    initUI();
+    initGoogle();
+  });
+
+  function initUI() {
     updateDate();
     updateOperatorSelects();
     updateSettingsUI();
@@ -664,21 +677,23 @@
     updatePenaltySelector();
     updateAnketaSelector();
 
-    initGoogleClients();
-
     setInterval(updateDate, 1000);
-  }
 
-  function updateDate() {
-    const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('currentDate').textContent = now.toLocaleDateString('ru-RU', options);
+    const topBtn = document.getElementById('googleSignInButton');
+    const tabBtn = document.getElementById('googleSignInButton2');
+
+    topBtn.addEventListener('click', handleGoogleSignIn);
+    tabBtn.addEventListener('click', handleGoogleSignIn);
   }
 
   // =========================
   // GOOGLE INIT
   // =========================
-  function initGoogleClients() {
+  function initGoogle() {
+    const topBtn = document.getElementById('googleSignInButton');
+    topBtn.disabled = true;
+    topBtn.textContent = '⏳ Loading Google...';
+
     const wait = () => {
       const hasGapi = typeof window.gapi !== 'undefined';
       const hasGoogle = typeof window.google !== 'undefined'
@@ -690,63 +705,76 @@
         return;
       }
 
+      // init gapi client
       window.gapi.load('client', async () => {
         try {
           await window.gapi.client.init({
             discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
           });
           gapiInited = true;
+          maybeEnableGoogleButton();
         } catch (e) {
           console.error(e);
-          showError('gapi init error (см. console)');
+          showError('Ошибка инициализации Google API (gapi).');
+          setDisconnected();
         }
       });
 
+      // init token client
       tokenClient = window.google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: SCOPES,
-        callback: async (resp) => {
-          if (!resp || resp.error) {
-            showError('Google auth error: ' + (resp?.error || 'unknown'));
-            setDisconnected();
-            return;
-          }
-
-          accessToken = resp.access_token;
-          userLoggedIn = true;
-
-          try { window.gapi.client.setToken({ access_token: accessToken }); } catch {}
-
-          let name = 'Google User';
-          let email = '';
-          try {
-            const me = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-              headers: { Authorization: 'Bearer ' + accessToken }
-            }).then(r => r.json());
-            name = me?.name || name;
-            email = me?.email || email;
-          } catch {}
-
-          setConnected(name, email);
-
-          await ensureSheetStructure();
-          await pullIncomeFromSheets();
-
-          updateEditTab();
-          generateDashboard();
-          showSuccess('✓ Connected & synced');
-        }
+        callback: (resp) => onGoogleToken(resp),
       });
-
       gisInited = true;
+      maybeEnableGoogleButton();
     };
 
     wait();
   }
 
+  function maybeEnableGoogleButton() {
+    const topBtn = document.getElementById('googleSignInButton');
+    if (gapiInited && gisInited) {
+      topBtn.disabled = false;
+      topBtn.textContent = '📊 Sign in with Google';
+    }
+  }
+
+  async function onGoogleToken(resp) {
+    if (!resp || resp.error) {
+      console.error(resp);
+      showError('Google auth error: ' + (resp && resp.error ? resp.error : 'unknown'));
+      setDisconnected();
+      return;
+    }
+
+    accessToken = resp.access_token;
+    window.gapi.client.setToken({ access_token: accessToken });
+
+    // Пробуем получить имя/почту (если Google разрешит)
+    let name = 'Google User';
+    let email = '';
+    try {
+      const me = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: 'Bearer ' + accessToken }
+      }).then(r => r.json());
+      name = me?.name || name;
+      email = me?.email || '';
+    } catch (e) {}
+
+    setConnected(name, email);
+
+    // Проверка доступа + создание листа "Доходы" если нужно
+    await sanityCheckAndPrepareSheet();
+
+    // Синхронизация данных
+    await updateSpreadsheetData();
+  }
+
   function handleGoogleSignIn() {
-    if (!gisInited) {
-      showError('Google libs ещё грузятся. Подожди 1-2 сек.');
+    if (!gapiInited || !gisInited || !tokenClient) {
+      showError('Google ещё не загрузился. Подожди 1-2 секунды и нажми снова.');
       return;
     }
     if (userLoggedIn) {
@@ -754,159 +782,70 @@
       showSuccess('✓ Вышли из аккаунта');
       return;
     }
+    // Важно: prompt=consent чтобы точно показывало окно прав
     tokenClient.requestAccessToken({ prompt: 'consent' });
   }
 
   function setConnected(name, email) {
+    userLoggedIn = true;
+
     const status = document.getElementById('syncStatus');
     status.textContent = '🟢 Connected';
     status.classList.add('connected');
 
     const btn = document.getElementById('googleSignInButton');
     btn.textContent = email ? `👤 ${name}` : `👤 ${name}`;
+
+    showSuccess('✓ Connected');
   }
 
   function setDisconnected() {
     userLoggedIn = false;
     accessToken = null;
     try { window.gapi.client.setToken(null); } catch {}
+
     const status = document.getElementById('syncStatus');
     status.textContent = '🔴 Not Connected';
     status.classList.remove('connected');
-    document.getElementById('googleSignInButton').textContent = '📊 Sign in with Google';
+
+    const btn = document.getElementById('googleSignInButton');
+    btn.textContent = '📊 Sign in with Google';
   }
 
-  async function sanityCheckSheet() {
+  async function sanityCheckAndPrepareSheet() {
+    // 1) Проверяем доступ к таблице
     try {
       await window.gapi.client.sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
-      return true;
     } catch (e) {
       console.error(e);
-      showError('Нет доступа к таблице. Share → Editor для админов.');
-      return false;
-    }
-  }
-
-  async function ensureSheetStructure() {
-    if (!userLoggedIn || !accessToken || !gapiInited) return;
-
-    const ok = await sanityCheckSheet();
-    if (!ok) return;
-
-    const ss = await window.gapi.client.sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
-    const titles = (ss.result.sheets || []).map(s => s.properties.title);
-
-    if (!titles.includes('Доходы')) {
-      await window.gapi.client.sheets.spreadsheets.batchUpdate({
-        spreadsheetId: SPREADSHEET_ID,
-        resource: { requests: [{ addSheet: { properties: { title: 'Доходы' } } }] }
-      });
+      showError('Нет доступа к таблице. Проверь: Share → Editor для твоего аккаунта.');
+      return;
     }
 
-    const header = [[
-      'ID','Дата','Время','Оператор','Анкета','Смена',
-      'OnlyFans Брутто','OnlyFans %','OnlyFans Чистыми',
-      'Крипто Брутто','Крипто %','Крипто Чистыми',
-      'PayPal Брутто','PayPal %','PayPal Чистыми',
-      'Общий Брутто','Общий Чистыми'
-    ]];
-
+    // 2) Проверяем есть ли лист "Доходы", если нет — создаём
     try {
-      const get = await window.gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: 'Доходы!A1:Q1'
-      });
-      const hasHeader = (get.result.values && get.result.values[0] && get.result.values[0][0] === 'ID');
-      if (!hasHeader) {
-        await window.gapi.client.sheets.spreadsheets.values.update({
+      const meta = await window.gapi.client.sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
+      const sheets = meta.result.sheets || [];
+      const hasIncome = sheets.some(s => s.properties && s.properties.title === 'Доходы');
+
+      if (!hasIncome) {
+        await window.gapi.client.sheets.spreadsheets.batchUpdate({
           spreadsheetId: SPREADSHEET_ID,
-          range: 'Доходы!A1',
-          valueInputOption: 'RAW',
-          resource: { values: header }
+          resource: {
+            requests: [{ addSheet: { properties: { title: 'Доходы' } } }]
+          }
         });
+        showSuccess('✓ Создал лист "Доходы" в таблице');
       }
-    } catch {
-      await window.gapi.client.sheets.spreadsheets.values.update({
-        spreadsheetId: SPREADSHEET_ID,
-        range: 'Доходы!A1',
-        valueInputOption: 'RAW',
-        resource: { values: header }
-      });
-    }
-  }
-
-  async function pullIncomeFromSheets() {
-    if (!userLoggedIn || !accessToken) return;
-
-    try {
-      const res = await window.gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: 'Доходы!A2:Q'
-      });
-
-      const rows = res.result.values || [];
-      const toNum = (x) => (x === undefined || x === null || x === '') ? 0 : Number(x);
-
-      const parsed = rows.map(r => ({
-        id: r[0] || String(Date.now() + Math.random()),
-        date: r[1] || '',
-        timestamp: r[2] || '',
-        operator: r[3] || '',
-        anketa: r[4] || '',
-        shift: r[5] || '',
-        day: r[1] ? (new Date(r[1]).getDate()) : (new Date().getDate()),
-        sources: {
-          onlyfans: { gross: toNum(r[6]),  percent: toNum(r[7]),  operatorShare: toNum(r[8])  },
-          crypto:   { gross: toNum(r[9]),  percent: toNum(r[10]), operatorShare: toNum(r[11]) },
-          paypal:   { gross: toNum(r[12]), percent: toNum(r[13]), operatorShare: toNum(r[14]) }
-        },
-        total: { gross: toNum(r[15]), operatorShare: toNum(r[16]) }
-      })).filter(x => x.operator || x.anketa || x.timestamp);
-
-      localStorage.setItem('incomeData', JSON.stringify(parsed));
     } catch (e) {
       console.error(e);
-      showError('Не смог прочитать из Sheets. Проверь доступ.');
-    }
-  }
-
-  async function pushIncomeToSheets() {
-    if (!userLoggedIn || !accessToken) return;
-
-    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
-    const values = [
-      ['ID','Дата','Время','Оператор','Анкета','Смена',
-       'OnlyFans Брутто','OnlyFans %','OnlyFans Чистыми',
-       'Крипто Брутто','Крипто %','Крипто Чистыми',
-       'PayPal Брутто','PayPal %','PayPal Чистыми',
-       'Общий Брутто','Общий Чистыми'
-      ],
-      ...data.map(r => ([
-        r.id, r.date, r.timestamp, r.operator, r.anketa, r.shift,
-        r.sources?.onlyfans?.gross ?? 0, r.sources?.onlyfans?.percent ?? 0, r.sources?.onlyfans?.operatorShare ?? 0,
-        r.sources?.crypto?.gross ?? 0,   r.sources?.crypto?.percent ?? 0,   r.sources?.crypto?.operatorShare ?? 0,
-        r.sources?.paypal?.gross ?? 0,   r.sources?.paypal?.percent ?? 0,   r.sources?.paypal?.operatorShare ?? 0,
-        r.total?.gross ?? 0, r.total?.operatorShare ?? 0
-      ]))
-    ];
-
-    try {
-      await ensureSheetStructure();
-      await window.gapi.client.sheets.spreadsheets.values.update({
-        spreadsheetId: SPREADSHEET_ID,
-        range: 'Доходы!A1',
-        valueInputOption: 'RAW',
-        resource: { values }
-      });
-      showSuccess('✓ Записано в Google Sheets');
-    } catch (e) {
-      console.error(e);
-      showError('Ошибка записи в таблицу. Проверь Share → Editor.');
+      // не критично, просто уведомим
+      showError('Не смог создать лист "Доходы". Создай вручную в Google Sheets.');
     }
   }
 
   // =========================
-  // TABS (фикс: event передаём)
+  // TAB NAV
   // =========================
   function switchTab(tabName, ev) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -918,32 +857,37 @@
     else if (tabName === 'reports') generateOperatorReport(allOperators[0]);
     else if (tabName === 'advances') updateAdvancesUI();
     else if (tabName === 'penalties') updatePenaltiesUI();
-    else if (tabName === 'sheets') showSpreadsheetViewer();
+    else if (tabName === 'sheets') {
+      if (userLoggedIn) showSpreadsheetViewer();
+    }
   }
 
   function showSpreadsheetViewer() {
     const container = document.getElementById('sheetsContainer');
     container.innerHTML = `
-      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
-        <button class="btn-secondary" onclick="openSheetInNewTab()">🔗 Открыть таблицу</button>
-        <button class="btn-secondary" onclick="pullIncomeFromSheets().then(()=>{updateEditTab();showSuccess('✓ Обновлено из Sheets')})">⬇️ Pull</button>
-        <button class="btn-secondary" onclick="pushIncomeToSheets()">⬆️ Push</button>
-      </div>
       <iframe
         src="https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit?usp=sharing"
         width="100%"
         height="650"
         style="border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 8px;"
       ></iframe>
+      <div style="margin-top:12px;color:var(--text-secondary);font-size:11px;">
+        Если таблица не открывается внутри — открой в новой вкладке и проверь доступ (Share → Editor).
+      </div>
     `;
   }
 
-  function openSheetInNewTab() {
-    window.open(`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit`, '_blank');
+  // =========================
+  // DATE
+  // =========================
+  function updateDate() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('currentDate').textContent = now.toLocaleDateString('ru-RU', options);
   }
 
   // =========================
-  // Helpers UI
+  // SELECTS / UI
   // =========================
   function updateOperatorSelects() {
     const selects = document.querySelectorAll('#operator, #advanceOperator, #penaltyOperator');
@@ -969,19 +913,23 @@
   function updateAnketaInputs() {
     const container = document.getElementById('anketaInputsContainer');
     const selected = Array.from(document.querySelectorAll('.anketa-checkbox input:checked')).map(el => el.value);
+
     if (selected.length === 0) { container.innerHTML = ''; return; }
 
     container.innerHTML = selected.map(anketa => `
       <div class="anketa-inputs">
         <div class="anketa-inputs-header">📱 ${anketa}</div>
         <div class="income-grid">
-          <div class="income-group"><span class="income-label">OnlyFans</span>
+          <div class="income-group">
+            <span class="income-label">OnlyFans</span>
             <input type="number" id="income-${anketa}-onlyfans" placeholder="0.00" step="0.01" min="0">
           </div>
-          <div class="income-group"><span class="income-label">Крипто</span>
+          <div class="income-group">
+            <span class="income-label">Крипто</span>
             <input type="number" id="income-${anketa}-crypto" placeholder="0.00" step="0.01" min="0">
           </div>
-          <div class="income-group"><span class="income-label">PayPal</span>
+          <div class="income-group">
+            <span class="income-label">PayPal</span>
             <input type="number" id="income-${anketa}-paypal" placeholder="0.00" step="0.01" min="0">
           </div>
         </div>
@@ -990,7 +938,45 @@
   }
 
   // =========================
-  // Income CRUD (минимально)
+  // GOOGLE SHEETS SYNC
+  // =========================
+  async function updateSpreadsheetData() {
+    if (!userLoggedIn || !accessToken) return;
+
+    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+
+    const values = [
+      ['ID','Дата','Время','Оператор','Анкета','Смена',
+        'OnlyFans Брутто','OnlyFans %','OnlyFans Чистыми',
+        'Крипто Брутто','Крипто %','Крипто Чистыми',
+        'PayPal Брутто','PayPal %','PayPal Чистыми',
+        'Общий Брутто','Общий Чистыми'
+      ],
+      ...data.map(r => [
+        r.id, r.date, r.timestamp, r.operator, r.anketa, r.shift,
+        r.sources.onlyfans.gross, r.sources.onlyfans.percent, r.sources.onlyfans.operatorShare,
+        r.sources.crypto.gross, r.sources.crypto.percent, r.sources.crypto.operatorShare,
+        r.sources.paypal.gross, r.sources.paypal.percent, r.sources.paypal.operatorShare,
+        r.total.gross, r.total.operatorShare
+      ])
+    ];
+
+    try {
+      await window.gapi.client.sheets.spreadsheets.values.update({
+        spreadsheetId: SPREADSHEET_ID,
+        range: 'Доходы!A1',
+        valueInputOption: 'RAW',
+        resource: { values }
+      });
+      showSuccess('✓ Connected & synced');
+    } catch (e) {
+      console.error(e);
+      showError('Ошибка записи в Google Sheets. Проверь доступ к таблице (Share → Editor).');
+    }
+  }
+
+  // =========================
+  // DATA LOGIC
   // =========================
   function addIncome() {
     const operator = document.getElementById('operator').value;
@@ -1018,17 +1004,22 @@
       if (total > 0) hasData = true;
 
       records.push({
-        id: String(Date.now() + Math.random()),
-        operator, anketa, shift,
+        id: Date.now() + Math.random(),
+        operator,
+        anketa,
+        shift,
         date: new Date().toISOString().split('T')[0],
         day: new Date().getDate(),
         timestamp: new Date().toLocaleString('ru-RU'),
         sources: {
           onlyfans: { gross: onlyfans, percent: onlyFansPercent, operatorShare: onlyfans * (onlyFansPercent / 100) },
-          crypto:   { gross: crypto,   percent: cryptoPercent,   operatorShare: crypto * (cryptoPercent / 100) },
-          paypal:   { gross: paypal,   percent: paypalPercent,   operatorShare: paypal * (paypalPercent / 100) }
+          crypto: { gross: crypto, percent: cryptoPercent, operatorShare: crypto * (cryptoPercent / 100) },
+          paypal: { gross: paypal, percent: paypalPercent, operatorShare: paypal * (paypalPercent / 100) }
         },
-        total: { gross: total, operatorShare: (onlyfans*onlyFansPercent/100) + (crypto*cryptoPercent/100) + (paypal*paypalPercent/100) }
+        total: {
+          gross: total,
+          operatorShare: (onlyfans * onlyFansPercent / 100) + (crypto * cryptoPercent / 100) + (paypal * paypalPercent / 100)
+        }
       });
     });
 
@@ -1038,20 +1029,18 @@
     records.forEach(r => data.push(r));
     localStorage.setItem('incomeData', JSON.stringify(data));
 
+    if (userLoggedIn) updateSpreadsheetData();
+
     showSuccess(`✓ Добавлено ${records.length} записей!`);
-    updateEditTab();
-
-    if (userLoggedIn) pushIncomeToSheets();
-
     document.getElementById('operator').value = '';
     document.getElementById('shift').value = '';
     updateAnketaSelector();
+    updateEditTab();
   }
 
   function updateEditTab() {
     const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
     const container = document.getElementById('editContainer');
-    if (!container) return;
 
     if (data.length === 0) {
       container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 32px;">Нет записей</p>';
@@ -1061,40 +1050,391 @@
     container.innerHTML = data.slice().reverse().map((record) => `
       <div class="transaction-row">
         <div>
-          <div style="font-weight: 600; font-size: 12px;">${record.operator} - ${record.anketa}</div>
-          <div style="font-size: 10px; color: var(--text-secondary);">${record.shift} | ${record.date}</div>
+          <div style="font-weight:600;font-size:12px;">${record.operator} - ${record.anketa}</div>
+          <div style="font-size:10px;color:var(--text-secondary);">${record.shift} | ${record.date}</div>
         </div>
-        <div style="font-weight: 700; color: var(--success); font-family: 'Space Mono'; font-size: 12px;">
-          $${Number(record.total.operatorShare || 0).toFixed(2)}
+        <div style="font-weight:700;color:var(--success);font-family:'Space Mono';font-size:12px;">$${record.total.operatorShare.toFixed(2)}</div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn-secondary" type="button" onclick="openEditModal('${record.id}')">✏️</button>
+          <button class="btn-secondary" type="button" onclick="deleteIncome('${record.id}')">🗑️</button>
         </div>
       </div>
     `).join('');
   }
 
-  // =========================
-  // Заглушки под твой большой функционал
-  // (чтобы файл точно не падал, даже если части не вставил)
-  // =========================
-  function generateDashboard() {}
-  function generateOperatorReport() {}
-  function updateReportsOperatorList() {}
-  function updateAdvanceSelector() {}
-  function updatePenaltySelector() {}
-  function updateSettingsUI() {}
-  function updateAdvancesUI() {}
-  function updatePenaltiesUI() {}
+  function openEditModal(id) {
+    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+    const record = data.find(r => r.id == id);
+    if (!record) return;
 
-  // =========================
-  // Toasts
-  // =========================
+    document.getElementById('editFormContent').innerHTML = `
+      <div class="form-group">
+        <label>OnlyFans</label>
+        <input type="number" id="edit-onlyfans" value="${record.sources.onlyfans.gross}" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Крипто</label>
+        <input type="number" id="edit-crypto" value="${record.sources.crypto.gross}" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>PayPal</label>
+        <input type="number" id="edit-paypal" value="${record.sources.paypal.gross}" step="0.01">
+      </div>
+    `;
+    window.currentEditId = id;
+    openModal('editModal');
+  }
+
+  function saveEdit() {
+    const onlyfans = parseFloat(document.getElementById('edit-onlyfans').value) || 0;
+    const crypto = parseFloat(document.getElementById('edit-crypto').value) || 0;
+    const paypal = parseFloat(document.getElementById('edit-paypal').value) || 0;
+
+    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+    const idx = data.findIndex(r => r.id == window.currentEditId);
+    if (idx === -1) return;
+
+    const record = data[idx];
+    record.sources.onlyfans.gross = onlyfans;
+    record.sources.onlyfans.operatorShare = onlyfans * (record.sources.onlyfans.percent / 100);
+    record.sources.crypto.gross = crypto;
+    record.sources.crypto.operatorShare = crypto * (record.sources.crypto.percent / 100);
+    record.sources.paypal.gross = paypal;
+    record.sources.paypal.operatorShare = paypal * (record.sources.paypal.percent / 100);
+
+    record.total.gross = onlyfans + crypto + paypal;
+    record.total.operatorShare = record.sources.onlyfans.operatorShare + record.sources.crypto.operatorShare + record.sources.paypal.operatorShare;
+
+    data[idx] = record;
+    localStorage.setItem('incomeData', JSON.stringify(data));
+
+    if (userLoggedIn) updateSpreadsheetData();
+
+    closeModal('editModal');
+    updateEditTab();
+    showSuccess('✓ Обновлено!');
+  }
+
+  function deleteIncome(id) {
+    if (!confirm('Удалить?')) return;
+    let data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+    data = data.filter(r => r.id != id);
+    localStorage.setItem('incomeData', JSON.stringify(data));
+
+    if (userLoggedIn) updateSpreadsheetData();
+
+    updateEditTab();
+    showSuccess('✓ Удалено!');
+  }
+
+  function generateDashboard() {
+    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+
+    let totalGross = 0;
+    let totalOperatorShare = 0;
+    const byAnketa = {};
+    const bySource = { onlyfans: { total: 0, byAnketa: {} }, crypto: { total: 0, byAnketa: {} }, paypal: { total: 0, byAnketa: {} } };
+
+    data.forEach(record => {
+      totalGross += record.total.gross;
+      totalOperatorShare += record.total.operatorShare;
+
+      if (!byAnketa[record.anketa]) byAnketa[record.anketa] = { gross: 0, operatorShare: 0 };
+      byAnketa[record.anketa].gross += record.total.gross;
+      byAnketa[record.anketa].operatorShare += record.total.operatorShare;
+
+      bySource.onlyfans.total += record.sources.onlyfans.operatorShare;
+      bySource.crypto.total += record.sources.crypto.operatorShare;
+      bySource.paypal.total += record.sources.paypal.operatorShare;
+
+      ['onlyfans','crypto','paypal'].forEach(source => {
+        if (!bySource[source].byAnketa[record.anketa]) bySource[source].byAnketa[record.anketa] = 0;
+        bySource[source].byAnketa[record.anketa] += record.sources[source].operatorShare;
+      });
+    });
+
+    const advances = {};
+    const salaries = {};
+    allOperators.forEach(op => {
+      const payments = JSON.parse(localStorage.getItem(`advances-${op}`) || '[]');
+      advances[op] = payments.filter(p => p.type === 'advance').reduce((sum, p) => sum + p.amount, 0);
+      salaries[op] = payments.filter(p => p.type === 'salary').reduce((sum, p) => sum + p.amount, 0);
+    });
+
+    const totalAdvances = Object.values(advances).reduce((a, b) => a + b, 0);
+    const totalSalaries = Object.values(salaries).reduce((a, b) => a + b, 0);
+
+    const adminShare = totalGross * (ADMIN_PERCENT / 100);
+
+    document.getElementById('dashboardContent').innerHTML = `
+      <div class="report-grid">
+        <div class="stat-card"><div class="stat-label">Брутто (все)</div><div class="stat-value">$${totalGross.toFixed(2)}</div></div>
+        <div class="stat-card"><div class="stat-label">Операторам</div><div class="stat-value">$${totalOperatorShare.toFixed(2)}</div></div>
+        <div class="stat-card"><div class="stat-label">Авансов</div><div class="stat-value" style="color: var(--warning);">-$${totalAdvances.toFixed(2)}</div></div>
+        <div class="stat-card"><div class="stat-label">Зарплат</div><div class="stat-value" style="color: var(--info);">-$${totalSalaries.toFixed(2)}</div></div>
+        <div class="stat-card"><div class="stat-label">Админам (${ADMIN_PERCENT}%)</div><div class="stat-value" style="color: var(--warning);">$${adminShare.toFixed(2)}</div></div>
+      </div>
+    `;
+  }
+
+  function updateReportsOperatorList() {
+    const container = document.getElementById('operatorListReport');
+    container.innerHTML = allOperators.map(op => `
+      <div style="padding:10px;background:rgba(99,102,241,0.05);border:2px solid transparent;border-radius:6px;cursor:pointer;transition:all 0.3s ease;font-weight:600;font-size:13px;${op===allOperators[0]?'background:rgba(99,102,241,0.2);border-color:var(--primary);color:var(--primary);':''}"
+        onclick="selectOperatorReport('${op}', event)">${op}</div>
+    `).join('');
+  }
+
+  function selectOperatorReport(operator, ev) {
+    document.querySelectorAll('#operatorListReport > div').forEach(el => {
+      el.style.background = 'rgba(99, 102, 241, 0.05)';
+      el.style.borderColor = 'transparent';
+      el.style.color = 'var(--text)';
+    });
+    if (ev && ev.target) {
+      ev.target.style.background = 'rgba(99, 102, 241, 0.2)';
+      ev.target.style.borderColor = 'var(--primary)';
+      ev.target.style.color = 'var(--primary)';
+    }
+    generateOperatorReport(operator);
+  }
+
+  function generateOperatorReport(operator) {
+    const data = JSON.parse(localStorage.getItem('incomeData') || '[]');
+    const operatorData = data.filter(record => record.operator === operator);
+
+    const byDay = {};
+    let totalGross = 0, totalOperatorShare = 0;
+
+    operatorData.forEach(record => {
+      const day = record.day;
+      if (!byDay[day]) byDay[day] = [];
+      byDay[day].push(record);
+
+      totalGross += record.total.gross;
+      totalOperatorShare += record.total.operatorShare;
+    });
+
+    document.getElementById('reportContent').innerHTML = `
+      <div class="card-title">📊 ${operator}</div>
+      <div class="report-grid">
+        <div class="stat-card"><div class="stat-label">Брутто</div><div class="stat-value">$${totalGross.toFixed(2)}</div></div>
+        <div class="stat-card"><div class="stat-label">Чистыми</div><div class="stat-value">$${totalOperatorShare.toFixed(2)}</div></div>
+      </div>
+
+      <div class="section-title">📅 По дням</div>
+      <table class="report-table">
+        <thead><tr><th>День</th><th>Анкета</th><th>Брутто</th><th>Чистыми</th></tr></thead>
+        <tbody>
+          ${Object.keys(byDay).sort((a,b)=>a-b).map(day =>
+            byDay[day].map(r => `
+              <tr>
+                <td>${day}</td>
+                <td><strong>${r.anketa}</strong></td>
+                <td>$${r.total.gross.toFixed(2)}</td>
+                <td><strong>$${r.total.operatorShare.toFixed(2)}</strong></td>
+              </tr>
+            `).join('')
+          ).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function addAdvance() {
+    const operator = document.getElementById('advanceOperator').value;
+    const type = document.getElementById('paymentType').value;
+    const amount = parseFloat(document.getElementById('advanceAmount').value);
+
+    if (!operator || !type || !(amount > 0)) { showError('Заполните все поля!'); return; }
+
+    const payment = { id: Date.now(), operator, type, amount, date: new Date().toLocaleString('ru-RU') };
+    let payments = JSON.parse(localStorage.getItem(`advances-${operator}`) || '[]');
+    payments.push(payment);
+    localStorage.setItem(`advances-${operator}`, JSON.stringify(payments));
+
+    document.getElementById('advanceAmount').value = '';
+    document.getElementById('paymentType').value = '';
+    updateAdvancesUI();
+    showSuccess('✓ Записано!');
+  }
+
+  function updateAdvanceSelector() {
+    const select = document.getElementById('advanceOperator');
+    const current = select.value;
+    select.innerHTML = '<option value="">-- Выберите --</option>' +
+      allOperators.map(op => `<option value="${op}">${op}</option>`).join('');
+    select.value = current;
+  }
+
+  function updateAdvancesUI() {
+    const operator = document.getElementById('advanceOperator').value;
+    const history = document.getElementById('advancesHistory');
+    if (!operator) { history.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Выберите оператора</p>'; return; }
+
+    const payments = JSON.parse(localStorage.getItem(`advances-${operator}`) || '[]');
+    history.innerHTML = payments.slice().reverse().map(p => `
+      <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(99,102,241,0.05);border-radius:6px;margin-bottom:6px;font-size:11px;">
+        <div>
+          <div style="font-weight:600;">${p.type === 'advance' ? '💰 Аванс' : '💵 Зарплата'}</div>
+          <div style="color: var(--text-secondary); font-size: 9px;">${p.date}</div>
+        </div>
+        <div style="font-weight:700;">$${p.amount.toFixed(2)}</div>
+      </div>
+    `).join('');
+  }
+
+  function addPenalty() {
+    const operator = document.getElementById('penaltyOperator').value;
+    const amount = parseFloat(document.getElementById('penaltyAmount').value);
+    const reason = document.getElementById('penaltyReason').value;
+
+    if (!operator || !(amount > 0)) { showError('Заполните обязательные поля!'); return; }
+
+    const penalty = { id: Date.now(), operator, amount, reason: reason || 'Штраф', date: new Date().toLocaleString('ru-RU') };
+    let penalties = JSON.parse(localStorage.getItem(`penalties-${operator}`) || '[]');
+    penalties.push(penalty);
+    localStorage.setItem(`penalties-${operator}`, JSON.stringify(penalties));
+
+    document.getElementById('penaltyAmount').value = '';
+    document.getElementById('penaltyReason').value = '';
+    updatePenaltiesUI();
+    showSuccess('✓ Штраф добавлен!');
+  }
+
+  function updatePenaltySelector() {
+    const select = document.getElementById('penaltyOperator');
+    const current = select.value;
+    select.innerHTML = '<option value="">-- Выберите --</option>' +
+      allOperators.map(op => `<option value="${op}">${op}</option>`).join('');
+    select.value = current;
+  }
+
+  function updatePenaltiesUI() {
+    const operator = document.getElementById('penaltyOperator').value;
+    const history = document.getElementById('penaltiesHistory');
+    if (!operator) { history.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Выберите оператора</p>'; return; }
+
+    const penalties = JSON.parse(localStorage.getItem(`penalties-${operator}`) || '[]');
+    history.innerHTML = penalties.slice().reverse().map(p => `
+      <div style="display:flex;justify-content:space-between;padding:8px;background:rgba(239,68,68,0.1);border-radius:6px;margin-bottom:6px;font-size:11px;">
+        <div>
+          <div style="font-weight:600;color:var(--danger);">⚠️ ${p.reason}</div>
+          <div style="color: var(--text-secondary); font-size: 9px;">${p.date}</div>
+        </div>
+        <div style="font-weight:700;color:var(--danger);">-$${p.amount.toFixed(2)}</div>
+      </div>
+    `).join('');
+  }
+
+  function updateSettingsUI() {
+    const operatorsList = document.getElementById('operatorsList');
+    operatorsList.innerHTML = allOperators.map(op => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(99,102,241,0.05);border-radius:6px;margin-bottom:6px;">
+        <span style="font-size:12px;">${op}</span>
+        <button class="btn-secondary" type="button" onclick="deleteOperator('${op}')">Удалить</button>
+      </div>
+    `).join('');
+
+    const anketasList = document.getElementById('anketasList');
+    anketasList.innerHTML = allAnkety.map(anketa => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(99,102,241,0.05);border-radius:6px;margin-bottom:6px;">
+        <span style="font-size:12px;">${anketa}</span>
+        <button class="btn-secondary" type="button" onclick="deleteAnketa('${anketa}')">Удалить</button>
+      </div>
+    `).join('');
+
+    const adminList = document.getElementById('adminList');
+    adminList.innerHTML = allAdmins.map(admin => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(99,102,241,0.05);border-radius:6px;margin-bottom:6px;">
+        <span style="font-size:12px;">${admin} (${ADMIN_PERCENT}%)</span>
+        <button class="btn-secondary" type="button" onclick="deleteAdmin('${admin}')">Удалить</button>
+      </div>
+    `).join('');
+  }
+
+  function openModal(id) { document.getElementById(id).classList.add('active'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+  function addOperator() {
+    const name = document.getElementById('newOperatorName').value.trim();
+    if (!name) { showError('Введите имя!'); return; }
+    if (allOperators.includes(name)) { showError('Существует!'); return; }
+    allOperators.push(name);
+    localStorage.setItem('allOperators', JSON.stringify(allOperators));
+    closeModal('addOperatorModal');
+    document.getElementById('newOperatorName').value = '';
+    updateOperatorSelects();
+    updateSettingsUI();
+    updateReportsOperatorList();
+    updateAdvanceSelector();
+    updatePenaltySelector();
+    showSuccess('✓ Добавлено!');
+  }
+
+  function addAnketa() {
+    const name = document.getElementById('newAnketaName').value.trim();
+    if (!name) { showError('Введите имя!'); return; }
+    if (allAnkety.includes(name)) { showError('Существует!'); return; }
+    allAnkety.push(name);
+    localStorage.setItem('allAnkety', JSON.stringify(allAnkety));
+    closeModal('addAnketaModal');
+    document.getElementById('newAnketaName').value = '';
+    updateAnketaSelector();
+    updateSettingsUI();
+    showSuccess('✓ Добавлено!');
+  }
+
+  function addAdmin() {
+    const name = document.getElementById('newAdminName').value.trim();
+    if (!name) { showError('Введите имя!'); return; }
+    if (allAdmins.includes(name)) { showError('Существует!'); return; }
+    allAdmins.push(name);
+    localStorage.setItem('allAdmins', JSON.stringify(allAdmins));
+    closeModal('addAdminModal');
+    document.getElementById('newAdminName').value = '';
+    updateSettingsUI();
+    showSuccess('✓ Добавлено!');
+  }
+
+  function deleteOperator(name) {
+    if (!confirm(`Удалить ${name}?`)) return;
+    allOperators = allOperators.filter(op => op !== name);
+    localStorage.setItem('allOperators', JSON.stringify(allOperators));
+    updateOperatorSelects();
+    updateSettingsUI();
+    updateReportsOperatorList();
+    updateAdvanceSelector();
+    updatePenaltySelector();
+    showSuccess('✓ Удалено!');
+  }
+
+  function deleteAnketa(name) {
+    if (!confirm(`Удалить ${name}?`)) return;
+    allAnkety = allAnkety.filter(a => a !== name);
+    localStorage.setItem('allAnkety', JSON.stringify(allAnkety));
+    updateAnketaSelector();
+    updateSettingsUI();
+    showSuccess('✓ Удалено!');
+  }
+
+  function deleteAdmin(name) {
+    if (!confirm(`Удалить ${name}?`)) return;
+    allAdmins = allAdmins.filter(a => a !== name);
+    localStorage.setItem('allAdmins', JSON.stringify(allAdmins));
+    updateSettingsUI();
+    showSuccess('✓ Удалено!');
+  }
+
   function showError(message) {
     const msg = document.createElement('div');
     msg.className = 'success-message';
     msg.textContent = '❌ ' + message;
     msg.style.background = 'var(--danger)';
     document.body.appendChild(msg);
-    setTimeout(() => msg.remove(), 3500);
+    setTimeout(() => msg.remove(), 4000);
   }
+
   function showSuccess(message) {
     const msg = document.createElement('div');
     msg.className = 'success-message';
@@ -1102,9 +1442,6 @@
     document.body.appendChild(msg);
     setTimeout(() => msg.remove(), 2500);
   }
-
-  window.addEventListener('load', init);
 </script>
-
 </body>
 </html>
